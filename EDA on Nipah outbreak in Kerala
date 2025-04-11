@@ -1,0 +1,41 @@
+#Name : Aleena Susan Prakash
+#Roll No. : 09
+
+#Course Project 3:
+#Create a real life application level project using Pandas / Numpy / Matplotlib to perform  exploratory analysis of data.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+df = pd.read_csv('nipah_outbreaks_kerala.csv')
+
+# Display basic information
+print( "Summary : \n",df.info())#Get a summary 
+print("Statistics : \n",df.describe())#Summary statistics
+
+# Total cases and deaths by district
+district_summary = df.groupby('District')[['Number_of_Cases', 'Number_of_Deaths']].sum()#Grouping
+print( "Summary of districts: \n",district_summary)
+
+# Plot total cases and deaths by district
+district_summary.plot(kind='bar', figsize=(10, 6))
+plt.title('Total Nipah Cases and Deaths by District in Kerala')
+plt.ylabel('Count')
+plt.xlabel('District')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Total cases and deaths by year
+year_summary = df.groupby('Year')[['Number_of_Cases', 'Number_of_Deaths']].sum()
+print( "Summary of Years : \n",year_summary)
+
+# Plot total cases and deaths by year
+year_summary.plot(kind='line', marker='o', figsize=(10, 6),)
+plt.title('Total Nipah Cases and Deaths by Year in Kerala')
+plt.ylabel('Count')
+plt.xlabel('Year')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
